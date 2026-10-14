@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digi-Clicker — Cookie Clicker im Digimon-Theme</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<div id="golden" class="hidden" title="Goldenes Digi-Ei!">🥚</div>
+<div id="app">
+  <header id="topbar">
+    <div class="logo">
+      <div class="logo-badge">🍪</div>
+      <div>
+        <h1>DIGI-<span>CLICKER</span></h1>
+        <p>Cookie Clicker im Digimon-Theme · 2D Desktop</p>
+      </div>
+    </div>
+    <div class="ver">v2 · Fan-Hommage 🥚</div>
+  </header>
+
+  <div id="ticker"><span id="tickerLabel">📢 Digi-News</span><span id="tickerText">Willkommen in der Digitalen Welt!</span></div>
+
+  <main id="layout">
+    <!-- LINKS: Keks -->
+    <section id="cookieCol" class="panel">
+      <div id="bank"><strong id="bits">0</strong><small>Daten-Bits im Vorrat</small></div>
+      <div id="cookieZone">
+        <div id="wrinklers"></div>
+        <button id="bigCookie" title="Klicken für Bits!">
+          <img id="bigImg" src="https://digi-api.com/images/digimon/w/Digitamamon.png" alt="Großes Digi-Ei"
+               onerror="this.outerHTML='🥚'">
+        </button>
+        <div id="floatLayer"></div>
+      </div>
+      <div id="perSec">pro Sekunde: <b id="bps">0</b> · pro Klick: <b id="clickVal">1</b></div>
+      <div id="chipMilk">💠 <b id="chips">0</b> Chips · 🥛 <b id="milkTop">0%</b></div>
+      <div id="buffs"></div>
+      <div id="milkWrap" title="Jeder Erfolg gibt +4% Milch (× Bonus). Milch verstärkt Katzen-Upgrades.">
+        <div id="milkFill"></div>
+        <span id="milkLabel">🥛 Milch: 0%</span>
+      </div>
+      <p class="hint">Klicke das Digi-Ei oder drücke <b>Leertaste</b>. Goldene Eier bringen Segen!</p>
+    </section>
+
+    <!-- MITTE: Menü -->
+    <section id="menuCol" class="panel">
+      <nav id="tabs">
+        <button data-tab="stats" class="active">📊 Statistik</button>
+        <button data-tab="ach">🏆 Erfolge <span id="achCount"></span></button>
+        <button data-tab="asc">💠 Ascension</button>
+        <button data-tab="opt">⚙️ Optionen</button>
+        <button data-tab="dev" id="tabBtnDev" class="hidden">🛠️ Dev</button>
+      </nav>
+      <div id="tab-stats" class="tabpage active"><ul id="statList"></ul></div>
+      <div id="tab-ach" class="tabpage"><div id="achGrid"></div></div>
+      <div id="tab-asc" class="tabpage">
+        <div class="ascBox">
+          <h3>💠 Ascension (Prestige)</h3>
+          <p>Beginne von vorn und erhalte <b>Himmels-Chips</b> für alle je gebackenen Bits.
+          Jeder unverbrauchte Chip gibt <b>+2% Ertrag</b>. Erfolge, Chips und Himmels-Upgrades bleiben.</p>
+          <p id="ascInfo"></p>
+          <button id="ascBtn">🌅 Wiedergeburt</button>
+        </div>
+        <h3>✨ Himmels-Upgrades (permanent)</h3>
+        <div id="heavenList"></div>
+      </div>
+      <div id="tab-opt" class="tabpage">
+        <div class="opt-row">
+          <button id="soundBtn">🔊 Sound: AN</button>
+          <button id="partBtn">✨ Partikel: AN</button>
+          <button id="numBtn">🔢 Zahlen: AN</button>
+        </div>
+        <div class="opt-row">
+          <button id="saveBtn">💾 Speichern</button>
+          <button id="exportBtn">📤 Export</button>
+          <button id="importBtn">📥 Import</button>
+        </div>
+        <div class="opt-row">
+          <button id="resetBtn" class="danger">🗑️ Hard Reset</button>
+        </div>
+        <p class="hint">Auto-Save alle 15s. Cookie-Clicker-authentisch: kein Offline-Ertrag —
+        deine Helfer ruhen, während du weg bist.</p>
+        <div class="opt-row">
+          <button id="devBtn">🛠️ Dev-Menü: AUS</button>
+        </div>
+      </div>
+      <div id="tab-dev" class="tabpage">
+        <div class="ascBox devBox">
+          <h3>🛠️ Developer-Menü (nur zum Testen!)</h3>
+          <p class="hint">Cheats wirken sofort. Vorsicht: kann den Spielspaß ruinieren. 😏</p>
+          <div class="devRow">
+            <input id="devBitsInput" value="1M" spellcheck="false" title="Betrag, z.B. 500K, 2.5B, 1e12">
+            <button id="devBitsBtn">＋ Bits geben</button>
+          </div>
+          <div class="devRow">
+            <button id="devBitsM">+1M</button>
+            <button id="devBitsB">+1B</button>
+            <button id="devBitsT">+1T</button>
+            <button id="devBitsQa">+1Qa</button>
+          </div>
+          <div class="devRow">
+            <button id="devChip1">＋1 Chip</button>
+            <button id="devChip10">＋10 Chips</button>
+            <button id="devChip100">＋100 Chips</button>
+          </div>
+          <div class="devRow">
+            <button id="devB10">Je +10 Helfer</button>
+            <button id="devAllUpg">Alle Upgrades</button>
+          </div>
+          <div class="devRow">
+            <button id="devAllHeaven">Alle Himmels-Upg.</button>
+            <button id="devAllAch">Alle Erfolge</button>
+          </div>
+          <div class="devRow">
+            <button id="devGold">🌟 Gold-Ei spawnen</button>
+            <button id="devWrink">🦠 8 Viren füllen</button>
+          </div>
+          <div class="devRow">
+            <button id="devFrenzy">⚡ Rausch (10 Min)</button>
+            <button id="devAsc">🌅 Gratis-Ascension</button>
+          </div>
+          <p class="hint" id="devInfo"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECHTS: Laden -->
+    <section id="storeCol" class="panel">
+      <div class="subhead"><h2>🏪 Digi-Laden</h2></div>
+      <div id="buyBar">
+        <button data-amt="1" class="active">×1</button>
+        <button data-amt="10">×10</button>
+        <button data-amt="100">×100</button>
+        <button id="sellBtn">Verkaufen: AUS</button>
+      </div>
+      <div class="subhead"><h2>⬆️ Upgrades</h2><span id="upgCount" class="hint"></span></div>
+      <div id="upgShelf"></div>
+      <div class="subhead"><h2>🏭 Helfer &amp; Gebäude</h2></div>
+      <div id="buildings"></div>
+    </section>
+  </main>
+
+  <footer>Fan-Projekt — Cookie-Clicker-System als Hommage, Digimon-Artworks via digi-api.com (u.a. Wikimon), © Bandai. Spielstand lokal.</footer>
+</div>
+<div id="toastWrap"></div>
+<div id="tooltip" class="hidden"></div>
+<script src="game.js"></script>
+</body>
+</html>
