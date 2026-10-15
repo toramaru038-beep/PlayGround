@@ -1,0 +1,33 @@
+SPRITE-CREDITS (alle CC0 — Public Domain, keine Namensnennung erforderlich, erfolgt hier freiwillig)
+
+1) "Tiny Dungeon" (v1.0, 05-07-2022) von Kenney (www.kenney.nl)
+   Lizenz: Creative Commons Zero v1.0 Universal (CC0)
+   http://creativecommons.org/publicdomain/zero/1.0/
+   Quelle: https://kenney.nl/assets/tiny-dungeon (Mirror: https://opengameart.org/content/tiny-dungeon)
+   Verwendet: player_antonio.png (tile_0087), player_imelda.png (tile_0084),
+   player_pasqua.png (tile_0099), enemy_slime.png (tile_0108),
+   enemy_ghost_td.png (tile_0121), gem.png (tile_0056), gold.png (tile_0082),
+   heart.png (tile_0115), chest.png (tile_0063), grave1.png (tile_0064),
+   grave2.png (tile_0065)
+   Volle Lizenz: assets/LICENSE-kenney.txt
+
+2) "Tiny Creatures" (v1.0, 18-03-2024) von Clint Bellanger (clintbellanger.net)
+   Lizenz: Creative Commons Zero v1.0 Universal (CC0)
+   http://creativecommons.org/publicdomain/zero/1.0/
+   Quelle: https://opengameart.org/content/tiny-creatures
+   (Erweiterung zu Kenneys Tiny Dungeon/Tiny Town, mit Kenneys Erlaubnis)
+   Verwendet: enemy_zombie.png (tile_0001), enemy_skel.png (tile_0002),
+   enemy_vampire.png (tile_0003), enemy_ghost.png (tile_0005),
+   enemy_brute.png = Golem (tile_0048, auch GOLEMON-Starter),
+   enemy_demon.png (tile_0124), enemy_bat1.png (tile_0137, auch VOLMON-Starter),
+   enemy_bat2.png (tile_0139), enemy_eye.png = Schwebendes Auge (tile_0121, Baby GLOTZMON),
+   mon_flame.png = Flammenschädel (tile_0004, PYROMON),
+   mon_plant.png = Pflanze (tile_0009, THORNMON),
+   mon_mush.png = Pilz (tile_0014, SHROOMON + Baby SPROSSMON),
+   mon_water.png = Wasser-Elementar (tile_0047, AQUAMON),
+   mon_knight.png = Todesritter (tile_0094, UMBRAMON),
+   mon_mino.png = Minotaurus (tile_0098, Brute-Gegner),
+   mon_owl.png = Eule (tile_0131, HOOTMON)
+   Volle Lizenz: assets/LICENSE-bellanger.txt
+
+Alle übrigen Grafiken/Sounds im Spiel sind original und prozedural erzeugt.

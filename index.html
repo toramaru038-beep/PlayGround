@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NET SURVIVORS — Digitale Monster-Hommage</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>🦇</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrap">
+  <div id="frame">
+    <canvas id="game" width="960" height="540"></canvas>
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+      <div id="hud-top">
+        <div id="hud-left">
+          <div id="hpbar"><div id="hpfill"></div><span id="hptext">100/100</span></div>
+          <div id="xpbar"><div id="xpfill"></div></div>
+        </div>
+        <div id="hud-center">
+          <div id="timer">00:00</div>
+          <div id="stage">SEKTOR 1 · NETZ-ZENTRUM</div>
+        </div>
+        <div id="hud-right">
+          <div class="stat"><span id="evostage">ROOKIE</span> · LV <span id="level">1</span></div>
+          <div class="stat">KILLS <span id="kills">0</span></div>
+          <div class="stat">BITS <span id="gold">0</span></div>
+          <div class="stat">🥚 <span id="eggs">0</span></div>
+        </div>
+      </div>
+      <div id="weapons"></div>
+    </div>
+    <!-- Title -->
+    <div id="title" class="overlay">
+      <div class="moon"></div>
+      <div class="bats">👾 &nbsp; 👾 &nbsp; 👾</div>
+      <h1>DIGITAL<br><span>TAMERS</span></h1>
+      <p class="sub">— NET SURVIVORS · SEKTOR 01 —</p>
+      <p class="controls dim">Nur VOLMON ist frei — schalte die anderen 7 im Gacha frei! Du spielst das Digimon selbst.</p>
+      <div id="teamPreview">
+        <img id="prevImg" src="assets/enemy_bat1.png" alt="Starter">
+        <div><b id="prevName">VOLMON</b><i id="prevMove">Voltstoß</i></div>
+      </div>
+      <div class="btnrow">
+        <button id="startBtn">▶ &nbsp;EINLOGGEN&nbsp; (Enter)</button>
+        <button id="teamBtn">🐾 TEAM</button>
+        <button id="gachaBtn">🥚 GACHA (<span id="titleEggs">0</span>)</button>
+      </div>
+      <p class="controls">WASD / Pfeile = Laufen · Auto-Angriff · P = Pause · M = Ton · F = Vollbild</p>
+      <p class="controls dim">Überlebe 10 Minuten im Netz. Sammle Daten-Splitter. Evolution bei Level 4 / 7 / 11.</p>
+      <p class="controls dim">Du startest solo mit 1 Digimon — Eliten droppen Digi-Eier für Gacha-Pulls (die anderen 7 Starter freischalten)!</p>
+      <p class="controls dim">Inoffizielle Fan-Hommage an Monster-Sammel-Anime — keine Original-Assets, kein Bandai-Spiel.</p>
+    </div>
+    <!-- Team -->
+    <div id="team" class="overlay hidden">
+      <h2 class="teamt">🐾 TEAM-MENÜ 🐾</h2>
+      <p class="sub2">Kämpfer wählen + mit Bits upgraden (je Stufe +8 % Schaden, +10 HP) · BITS: <span id="teamBits">0</span></p>
+      <p class="sub2 dim2">Bits droppen von Gegnern (6 %) und immer von Eliten.</p>
+      <div id="teamFlex">
+        <div id="teamGrid"></div>
+        <div id="teamDetail"></div>
+      </div>
+      <div class="btnrow"><button id="teamBack">ZURÜCK (T)</button></div>
+    </div>
+    <!-- Gacha -->
+    <div id="gacha" class="overlay hidden">
+      <h2 class="geggs">🥚 GACHA-PULL 🥚</h2>
+      <p class="sub2">1 Digi-Ei = 1 Pull! Jeder Pull schaltet einen der anderen 7 Starter als Kämpfer frei.</p>
+      <div id="gachaEgg">🥚</div>
+      <div id="gachaResult"><p class="sub2">Drücke PULLEN oder Enter…</p></div>
+      <div class="btnrow">
+        <button id="pullBtn">PULLEN (1 🥚)</button>
+        <button id="freeEggsBtn" title="Gratis-Eier zum Testen">+3 🥚 GRATIS</button>
+        <button id="gachaClose">WEITER (E)</button>
+      </div>
+      <p class="sub2">Eier: <span id="gachaEggs">0</span> · Sammlung: <span id="gachaColl">0</span>/7 Starter · Bits: <span id="gachaBits">0</span></p>
+      <div id="poolWrap">
+        <p class="sub2">MÖGLICHE PULLS — jeder Starter ~14 % · ✓ = im Besitz</p>
+        <div id="gachaPool"></div>
+      </div>
+    </div>
+    <!-- Evolution -->
+    <div id="evolve" class="overlay hidden">
+      <h2 class="evo">✦ EVOLUTION! ✦</h2>
+      <p class="sub2" id="evoText"></p>
+      <button id="evoBtn">✦ DIGITIEREN ✦ (Enter)</button>
+    </div>
+    <!-- Level up -->
+    <div id="levelup" class="overlay hidden">
+      <h2>EVOLUTION!</h2>
+      <p class="sub2">Dein Partner wird stärker — wähle (1 / 2 / 3 oder Klick)</p>
+      <div id="cards"></div>
+    </div>
+    <!-- Pause -->
+    <div id="pause" class="overlay hidden">
+      <h2>PAUSE</h2>
+      <p class="sub2">Weiter mit P / Esc / Klick</p>
+      <div id="pauseStats"></div>
+      <button id="resumeBtn">WEITER</button>
+    </div>
+    <!-- Game over -->
+    <div id="gameover" class="overlay hidden">
+      <h2 class="dead">SIGNAL VERLOREN</h2>
+      <p class="sub2" id="finalStats"></p>
+      <div class="btnrow">
+        <button id="retryBtn">↻ NOCHMAL (Enter)</button>
+        <button id="menuBtn">🏠 HAUPTMENÜ</button>
+      </div>
+    </div>
+    <!-- Win -->
+    <div id="win" class="overlay hidden">
+      <h2 class="gold">NETZ GERETTET!</h2>
+      <p class="sub2">10 Minuten durchgehalten. Die Viren ziehen sich zurück… vorerst.</p>
+      <p class="sub2" id="winStats"></p>
+      <div class="btnrow">
+        <button id="againBtn">↻ ENDLOS-MODUS WEITER</button>
+        <button id="menuBtn2">🏠 HAUPTMENÜ</button>
+      </div>
+    </div>
+    <div id="toast"></div>
+  </div>
+  <div id="foot">DIGITAL TAMERS · inoffizielle Hommage (eigene + CC0-Sprites: Kenney, Clint Bellanger — siehe assets/) · WASD laufen, Attacken automatisch</div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
